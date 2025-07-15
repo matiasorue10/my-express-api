@@ -1,23 +1,21 @@
-import { ZodAny, ZodError } from 'zod';
-import { Request, Response, NextFunction } from 'express';
+import { ZodError, ZodObject } from "zod";
+import { Request, Response, NextFunction } from "express";
 
 export const validate =
-  (schema: ZodAny) => (req: Request, res: Response, next: NextFunction) => {
+  (schema: ZodObject<any>) =>
+  (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse({
-        body: req.body,
-        query: req.query,
-        params: req.params,
-      });
+      schema.parse(req);
       next();
     } catch (err) {
       if (err instanceof ZodError) {
+        const messages = err.issues.map((issue) => issue.message);
         return res.status(400).json({
-          message: 'Error de validación',
-          errors: err.message,
+          message: "Error de validación",
+          errors: messages,
         });
       }
 
-      return res.status(500).json({ message: 'Error interno' });
+      return res.status(500).json({ message: "Error interno" });
     }
   };

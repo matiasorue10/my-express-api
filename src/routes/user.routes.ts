@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { createUser, getUser, getUsers } from "../controllers/user.controller";
+import { validate } from "../middlewares/validate";
+import { createUserSchema } from "../validations/user.schema";
 
 const router = Router();
 
@@ -36,7 +38,7 @@ const router = Router();
  *       201:
  *         description: Usuario creado
  */
-router.post("/", createUser);
+router.post("/", validate(createUserSchema), createUser);
 
 /**
  * @swagger
