@@ -1,4 +1,4 @@
-# Bootcamp API
+# My Express API
 
 A RESTful API for pratice purposes.
 
@@ -16,8 +16,8 @@ A RESTful API for pratice purposes.
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/bootcamp-api.git
-   cd bootcamp-api
+   git clone https://github.com/matiasorue10/my-express-api.git
+   cd my-express-api
    ```
 
 2. **Install dependencies**
